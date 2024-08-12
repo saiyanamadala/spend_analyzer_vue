@@ -3,14 +3,18 @@ import { defineStore } from 'pinia'
 import { useRouter } from 'vue-router'
 
 export const useUserStore = defineStore('users', () => {
-  const users = reactive(JSON.parse(localStorage.getItem('registeredUsers')) || [])
-
-  //const users = reactive(localStorage.getItem('registeredUsers') ? JSON.parse(localStorage.getItem('registeredUsers')) : [])
+  const storedUsers = localStorage.getItem('registeredUsers');
+  const users = reactive(storedUsers ? JSON.parse(storedUsers) : []);
 
   const newUser = reactive({
     username: '',
     password: ''
   })
+
+  interface loginUser {
+    username: string
+    password: string
+  }
 
   const loginUser = reactive({
     username: '',
@@ -30,7 +34,7 @@ export const useUserStore = defineStore('users', () => {
       loginErrorMsg.value = "Please register before you login"
     }
     else {
-      users.forEach(item => {
+      users.forEach((item: loginUser) => {
         if (item.username === loginUser.username && item.password === loginUser.password) {
           loginErrorMsg.value = ''
           router.push({ name: "Home" })

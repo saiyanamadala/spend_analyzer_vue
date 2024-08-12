@@ -6,13 +6,23 @@ export const useSpendStore = defineStore('spends', () => {
 
     const user = useUserStore()
 
-    const spends = reactive([
+    interface newSpend {
+        username: string
+        id: number
+        description: string
+        type: string
+        amount: number
+    }
+
+    const spends = reactive<newSpend[]>([
 
     ])
 
-    const newSpend = reactive({
+
+
+    const newSpend = reactive<newSpend>({
         username: '',
-        id: undefined,
+        id: 0,
         description: '',
         type: '',
         amount: 0
@@ -23,10 +33,10 @@ export const useSpendStore = defineStore('spends', () => {
         newSpend.id = spends.length > 0 ? Math.max(...spends.map(spend => spend.id)) + 1 : 1
         spends.push({ ...newSpend })
         newSpend.username = ''
-        newSpend.id = undefined
+        newSpend.id = 0
         newSpend.description = ''
         newSpend.type = ''
-        newSpend.amount = undefined
+        newSpend.amount = 0
 
     }
 
