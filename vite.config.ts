@@ -14,5 +14,9 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
-  }
+  },
+  base: '/spend_analyzer_vue/',  // Set the base path to your repository name
+  build: {
+    outDir: 'dist',  // Directory to output the build files
+  },
 })
