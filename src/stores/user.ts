@@ -36,7 +36,7 @@ export const useUserStore = defineStore('users', () => {
           router.push({ name: "Home" })
         }
         else {
-          loginErrorMsg.value = "User not found"
+          loginErrorMsg.value = "User not found or wrong password"
         }
       })
     }
